@@ -8,7 +8,7 @@ import locale
 from datetime import date
 st.set_page_config(page_title="Login", page_icon="🔐", layout="wide")
 # URL dari Google Apps Script Web App
-APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzpjfcCG6PjXDhMAxKqRkYY5hg9CjazA_uCaenC_6-Q-99LDF0NTR7mukBf8tQNg40KoQ/exec"
+APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycby0qxmXTZuUx77XoFVyTwAhnufKMrYkUNHwU3UMBnIvwtEl1fUdECqbaalyzjcPN4uCvQ/exec"
 
 # Fungsi untuk mendapatkan semua data dari Google Sheets
 def get_all_data():
@@ -238,31 +238,7 @@ submit_button = st.button("💾 Simpan Data", use_container_width=True)
 # Jika tombol "Simpan Data" ditekan
 if submit_button:
     try:
-        # Atur locale ke Bahasa Indonesia untuk format tanggal
-        # Mapping nama hari dan bulan
-        nama_hari = {
-            "Monday": "Senin", "Tuesday": "Selasa", "Wednesday": "Rabu",
-            "Thursday": "Kamis", "Friday": "Jumat", "Saturday": "Sabtu", "Sunday": "Minggu"
-        }
-
-        nama_bulan = {
-            "January": "Januari", "February": "Februari", "March": "Maret",
-            "April": "April", "May": "Mei", "June": "Juni", "July": "Juli",
-            "August": "Agustus", "September": "September", "October": "Oktober",
-            "November": "November", "December": "Desember"
-        }
-
-        # Ambil tanggal saat ini
-        tanggal = datetime.now()
-
-        # Format default (Inggris)
-        hari_eng = tanggal.strftime("%A")
-        bulan_eng = tanggal.strftime("%B")
-
-        # Ganti dengan bahasa Indonesia
-        hari_id = nama_hari[hari_eng]
-        bulan_id = nama_bulan[bulan_eng]
-        formatted_tanggal = f"{hari_id}, {tanggal.day} {bulan_id} {tanggal.year}"  
+        formatted_tanggal = tanggal.strftime("%Y-%m-%d")  
 
         # Data yang akan dikirim ke Apps Script
         data = {

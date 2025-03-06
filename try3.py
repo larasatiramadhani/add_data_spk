@@ -239,13 +239,30 @@ submit_button = st.button("💾 Simpan Data", use_container_width=True)
 if submit_button:
     try:
         # Atur locale ke Bahasa Indonesia untuk format tanggal
-        try:
-            locale.setlocale(locale.LC_TIME, "id_ID.utf8")
-        except locale.Error:
-            locale.setlocale(locale.LC_TIME, "id_ID")
+        # Mapping nama hari dan bulan
+        nama_hari = {
+            "Monday": "Senin", "Tuesday": "Selasa", "Wednesday": "Rabu",
+            "Thursday": "Kamis", "Friday": "Jumat", "Saturday": "Sabtu", "Sunday": "Minggu"
+        }
 
-        # Format tanggal sebelum dikirim ke Apps Script
-        formatted_tanggal = tanggal.strftime("%A, %d %B %Y")  
+        nama_bulan = {
+            "January": "Januari", "February": "Februari", "March": "Maret",
+            "April": "April", "May": "Mei", "June": "Juni", "July": "Juli",
+            "August": "Agustus", "September": "September", "October": "Oktober",
+            "November": "November", "December": "Desember"
+        }
+
+        # Ambil tanggal saat ini
+        tanggal = datetime.now()
+
+        # Format default (Inggris)
+        hari_eng = tanggal.strftime("%A")
+        bulan_eng = tanggal.strftime("%B")
+
+        # Ganti dengan bahasa Indonesia
+        hari_id = nama_hari[hari_eng]
+        bulan_id = nama_bulan[bulan_eng]
+        formatted_tanggal = f"{hari_id}, {tanggal.day} {bulan_id} {tanggal.year}"  
 
         # Data yang akan dikirim ke Apps Script
         data = {
